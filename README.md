@@ -65,18 +65,23 @@ You should see:
 
 ## Local Development
 
+You can run the app locally in two ways:
+
+### Method A: Connect to Neon (Shared Remote DB)
 1. Create a `.env` file in the project root:
-   ```
+   ```env
    DATABASE_URL=postgresql://user:password@ep-xxx.us-east-2.aws.neon.tech/neondb?sslmode=require
    ```
-2. Run the dev server:
-   ```bash
-   npm run dev
-   ```
-3. Visit `http://localhost:5173/api/init` once to seed local data
-4. Open `http://localhost:5173` — the site connects to the same Neon database!
+2. Run `npm run dev`
+3. The app will connect to your remote Neon PostgreSQL database.
 
-> **Note**: In local dev, both Vite dev server (port 5173) and Vercel functions (`/api/*`) run simultaneously via `vercel dev`. Alternatively, you can use just `npm run dev` — the Vite dev proxy will forward `/api/*` requests. If that doesn't work, use `npx vercel dev` instead.
+### Method B: Offline Local DB (No Setup Required)
+If you just want to test the app **immediately** without setting up a database:
+1. Make sure you do **NOT** have a `DATABASE_URL` in your `.env` file.
+2. Run `npm run dev`
+3. The app automatically creates a local SQLite file (`local.db`) using an included Vite plugin.
+4. Visit `http://localhost:5173/api/init` once to seed the local database.
+5. Open `http://localhost:5173` — all buttons and actions will work perfectly using the local file!
 
 ---
 
